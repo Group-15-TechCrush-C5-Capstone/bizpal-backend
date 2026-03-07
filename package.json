@@ -1,0 +1,28 @@
+{
+  "name": "bizpal-backend",
+  "version": "1.0.0",
+  "description": "Bizpal Backend work-in-progress",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Group-15-TechCrush-C5-Capstone/bizpad-backend.git"
+  },
+  "keywords": [],
+  "author": "Bizpal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Group-15-TechCrush-C5-Capstone/bizpad-backend/issues"
+  },
+  "homepage": "https://github.com/Group-15-TechCrush-C5-Capstone/bizpad-backend#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
