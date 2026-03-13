@@ -1,6 +1,9 @@
 import express from "express"
 import notesRoutes from "./routes/notes.routes.js"
 import remindersRoutes from "./routes/reminders.routes.js"
+import dashboardRoutes from "./routes/dashboard.routes.js"
+import analyticsRoutes from "./routes/analytics.routes.js"
+
 
 const app = express()
 
@@ -8,6 +11,9 @@ app.use(express.json())
 
 app.use("/api", notesRoutes)
 app.use("/api", remindersRoutes)
+app.use("/api", dashboardRoutes)
+app.use("/api", analyticsRoutes)
+
 
 app.get("/", (req, res) => {
     res.send("Bizpal API is running")
