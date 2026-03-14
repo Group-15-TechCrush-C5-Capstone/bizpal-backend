@@ -4,7 +4,13 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(120) UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    phone VARCHAR(15),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_verified BOOLEAN DEFAULT FALSE,
+    verify_token VARCHAR(255),
+    verify_token_expires DATETIME,
+    reset_token VARCHAR(255),
+    reset_token_expires DATETIME
 );
 
 -- CUSTOMERS TABLE
@@ -30,6 +36,7 @@ CREATE TABLE notes (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- REMINDERS TABLE
 CREATE TABLE reminders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     note_id INT NOT NULL,
@@ -39,13 +46,7 @@ CREATE TABLE reminders (
     status VARCHAR(20) DEFAULT 'pending',
     completed_at TIMESTAMP NULL DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_note
-      FOREIGN KEY(note_id) REFERENCES notes(id) ON DELETE CASCADE,
-
-    CONSTRAINT fk_reminder_customer
-      FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE CASCADE,
-
-    CONSTRAINT fk_reminder_user
-      FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    CONSTRAINT fk_note FOREIGN KEY (note_id) REFERENCES notes(id) ON DELETE CASCADE,
+    CONSTRAINT fk_reminder_customer FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+    CONSTRAINT fk_reminder_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
