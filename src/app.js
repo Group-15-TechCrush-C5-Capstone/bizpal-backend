@@ -1,4 +1,6 @@
 import express from "express";
+
+import bcrypt from "bcrypt";
 import authRoutes from "./routes/auth.route.js"
 import notesRoutes from "./routes/notes.routes.js"
 import remindersRoutes from "./routes/reminders.routes.js"
@@ -18,7 +20,7 @@ app.get("/", (req, res) => {
     res.send("Bizpal API is running");
 });
 
-app.use(globalErrorHandler)
+// app.use(globalErrorHandler)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
