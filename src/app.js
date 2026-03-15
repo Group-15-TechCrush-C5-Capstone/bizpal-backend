@@ -1,6 +1,6 @@
 import express from "express";
-
 import bcrypt from "bcrypt";
+
 import authRoutes from "./routes/auth.route.js"
 import notesRoutes from "./routes/notes.routes.js"
 import remindersRoutes from "./routes/reminders.routes.js"

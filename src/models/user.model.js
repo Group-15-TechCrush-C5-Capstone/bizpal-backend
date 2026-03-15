@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import db from "../config/db.js";
 import bcrypt from "bcrypt"; 
 
 export const createUser = async({name, email, password, phone, verifyToken, verifyTokenExpires}) => {
@@ -6,7 +6,7 @@ export const createUser = async({name, email, password, phone, verifyToken, veri
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt)
 
-    const [result] = await pool.query(
+    const [result] = await db.query(
         `INSERT INTO users (name, email, password, phone, verify_token, verify_token_expires) VALUES (?, ?, ?, ?, ?, ?)`,
         [name, email, password, phone, verifyToken, verifyTokenExpires]
     );
@@ -14,18 +14,25 @@ export const createUser = async({name, email, password, phone, verifyToken, veri
 };
 
 export const findUserByEmail = async (email) => {
-    const [rows] = await pool.query(`SELECT * FROM users WHERE email = ?`, [email]);
+    const [rows] = await db.query(`SELECT * FROM users WHERE email = ?`, [email]);
     return rows[0];
 }
 
-
 export const findUserById = async(id) => {
-    const [rows] = await pool.query(
+    const [rows] = await db.query(
         `SELECT id, name, email, phone, is_verified, created_at FROM users WHERE id = ?`, 
         [id]
     );
     return rows[0];
 };
+
+export const updateLastLogin = async(id) => {
+    await db.query(
+        `UPDATE users SET last_login = NOW() WHERE id = ?`,
+        [id]
+    )
+}
+
 
 
 

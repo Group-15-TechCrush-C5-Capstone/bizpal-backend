@@ -1,13 +1,15 @@
 import jwt from "jsonwebtoken";
 
+
 import { configurations } from "../config/env.js";
 
+// Expires in 7days
 export const signToken = (payload) => {
-    jwt.sign(payload, configurations.JWT_SECRET, {
-        expiresIn: configurations.JWT_EXPIRES_IN
+    return jwt.sign(payload, configurations.JWT_SECRET, {
+        expiresIn: configurations.JWT_EXPIRES || '1h'
     });
 }
-
 export const verifyToken = (token) => {
-    jwt.verify(token, configurations.JWT_SECRET);
+    return jwt.verify(token, configurations.JWT_SECRET);
 }
+
